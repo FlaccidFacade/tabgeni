@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import Head from 'next/head'
+import Link from 'next/link'
 import UploadSection from '@/components/UploadSection'
 import SongDetails from '@/components/SongDetails'
 import Library from '@/components/Library'
@@ -78,6 +79,15 @@ export default function Home() {
             <Library key={refreshLibrary} onSongSelect={setCurrentSong} />
           )}
         </div>
+
+        {/* Footer */}
+        <footer className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 mt-12">
+          <div className="border-t border-gray-200 pt-6 text-center">
+            <Link href="/privacy" className="text-gray-600 hover:text-blue-600 transition-colors">
+              Privacy Policy
+            </Link>
+          </div>
+        </footer>
       </main>
     </>
   )
