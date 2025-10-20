@@ -1,11 +1,13 @@
 const express = require('express');
 const router = express.Router();
 const Song = require('../models/Song');
+const { apiLimiter, writeLimiter } = require('../middleware/rateLimiter');
 
 // Get all songs in library
-router.get('/', async (req, res) => {
+router.get('/', apiLimiter, async (req, res) => {
   try {
-    const userId = req.query.userId || 'default-user';
+    // Sanitize userId to prevent injection
+    const userId = String(req.query.userId || 'default-user').replace(/[^a-zA-Z0-9_-]/g, '');
     const songs = await Song.find({ userId }).sort({ createdAt: -1 });
     
     res.json({
@@ -23,8 +25,13 @@ router.get('/', async (req, res) => {
 });
 
 // Get single song
-router.get('/:id', async (req, res) => {
+router.get('/:id', apiLimiter, async (req, res) => {
   try {
+    // Validate MongoDB ObjectId format
+    if (!/^[0-9a-fA-F]{24}$/.test(req.params.id)) {
+      return res.status(400).json({ error: 'Invalid song ID format' });
+    }
+    
     const song = await Song.findById(req.params.id);
     
     if (!song) {
@@ -45,11 +52,14 @@ router.get('/:id', async (req, res) => {
 });
 
 // Save song to library
-router.post('/', async (req, res) => {
+router.post('/', writeLimiter, async (req, res) => {
   try {
+    // Sanitize userId to prevent injection
+    const userId = String(req.body.userId || 'default-user').replace(/[^a-zA-Z0-9_-]/g, '');
+    
     const songData = {
-      userId: req.body.userId || 'default-user',
       ...req.body,
+      userId,
     };
 
     const song = new Song(songData);
@@ -70,8 +80,13 @@ router.post('/', async (req, res) => {
 });
 
 // Update song
-router.put('/:id', async (req, res) => {
+router.put('/:id', writeLimiter, async (req, res) => {
   try {
+    // Validate MongoDB ObjectId format
+    if (!/^[0-9a-fA-F]{24}$/.test(req.params.id)) {
+      return res.status(400).json({ error: 'Invalid song ID format' });
+    }
+    
     const song = await Song.findByIdAndUpdate(
       req.params.id,
       { ...req.body, updatedAt: Date.now() },
@@ -97,8 +112,13 @@ router.put('/:id', async (req, res) => {
 });
 
 // Delete song
-router.delete('/:id', async (req, res) => {
+router.delete('/:id', writeLimiter, async (req, res) => {
   try {
+    // Validate MongoDB ObjectId format
+    if (!/^[0-9a-fA-F]{24}$/.test(req.params.id)) {
+      return res.status(400).json({ error: 'Invalid song ID format' });
+    }
+    
     const song = await Song.findByIdAndDelete(req.params.id);
     
     if (!song) {

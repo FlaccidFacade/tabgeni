@@ -3,6 +3,7 @@ const router = express.Router();
 const multer = require('multer');
 const path = require('path');
 const fs = require('fs');
+const { uploadLimiter } = require('../middleware/rateLimiter');
 
 // Create uploads directory if it doesn't exist
 const uploadsDir = path.join(__dirname, '../../uploads');
@@ -39,7 +40,7 @@ const upload = multer({
 });
 
 // Upload audio file
-router.post('/', upload.single('audio'), async (req, res) => {
+router.post('/', uploadLimiter, upload.single('audio'), async (req, res) => {
   try {
     if (!req.file) {
       return res.status(400).json({ error: 'No audio file uploaded' });

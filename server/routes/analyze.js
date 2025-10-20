@@ -2,16 +2,18 @@ const express = require('express');
 const router = express.Router();
 const path = require('path');
 const Song = require('../models/Song');
+const { apiLimiter } = require('../middleware/rateLimiter');
 const {
   identifySong,
   detectBPM,
   detectKey,
   fetchTabsAndChords,
   fetchBackingTrack,
+  sanitizeFilename,
 } = require('../utils/audioAnalysis');
 
 // Analyze audio file
-router.post('/', async (req, res) => {
+router.post('/', apiLimiter, async (req, res) => {
   try {
     const { filename, title, artist } = req.body;
 
@@ -26,7 +28,9 @@ router.post('/', async (req, res) => {
 
     // If filename provided, identify from audio
     if (filename) {
-      audioFilePath = path.join(__dirname, '../../uploads', filename);
+      // Sanitize filename to prevent path traversal
+      const safeFilename = sanitizeFilename(filename);
+      audioFilePath = path.join(__dirname, '../../uploads', safeFilename);
       
       // Identify song using AudD
       const identified = await identifySong(audioFilePath);
@@ -69,7 +73,7 @@ router.post('/', async (req, res) => {
       tabs: tabsData.tabs,
       backingTrackUrl: trackData.backingTrackUrl,
       youtubeUrl: trackData.youtubeUrl,
-      audioUrl: filename ? `/uploads/${filename}` : null,
+      audioUrl: filename ? `/uploads/${sanitizeFilename(filename)}` : null,
     };
 
     res.json({

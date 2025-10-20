@@ -10,27 +10,28 @@
     "server": "node server/index.js"
   },
   "dependencies": {
-    "next": "^14.2.25",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "express": "^4.18.2",
-    "mongoose": "^8.9.5",
     "axios": "^1.12.0",
     "cors": "^2.8.5",
     "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "express-rate-limit": "^7.5.1",
+    "formidable": "^3.5.1",
+    "mongoose": "^8.9.5",
     "multer": "^2.0.2",
     "music-tempo": "^1.0.1",
-    "formidable": "^3.5.1"
+    "next": "^14.2.25",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
   },
   "devDependencies": {
     "@types/node": "^20.10.5",
     "@types/react": "^18.2.45",
     "@types/react-dom": "^18.2.18",
-    "typescript": "^5.3.3",
+    "autoprefixer": "^10.4.16",
     "eslint": "^8.56.0",
     "eslint-config-next": "^14.2.25",
-    "tailwindcss": "^3.3.6",
     "postcss": "^8.4.32",
-    "autoprefixer": "^10.4.16"
+    "tailwindcss": "^3.3.6",
+    "typescript": "^5.3.3"
   }
 }

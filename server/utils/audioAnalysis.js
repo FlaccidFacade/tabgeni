@@ -1,4 +1,15 @@
 const axios = require('axios');
+const path = require('path');
+
+/**
+ * Sanitize filename to prevent path traversal attacks
+ */
+function sanitizeFilename(filename) {
+  // Remove any path separators and only keep the basename
+  const basename = path.basename(filename);
+  // Only allow alphanumeric, dots, hyphens, and underscores
+  return basename.replace(/[^a-zA-Z0-9._-]/g, '');
+}
 
 /**
  * Identify song using AudD API
@@ -15,9 +26,17 @@ async function identifySong(audioFilePath) {
     const FormData = require('form-data');
     const fs = require('fs');
     
+    // Validate the file path to prevent path traversal
+    const resolvedPath = path.resolve(audioFilePath);
+    const uploadsDir = path.resolve(__dirname, '../../uploads');
+    
+    if (!resolvedPath.startsWith(uploadsDir)) {
+      throw new Error('Invalid file path');
+    }
+    
     const formData = new FormData();
     formData.append('api_token', apiKey);
-    formData.append('file', fs.createReadStream(audioFilePath));
+    formData.append('file', fs.createReadStream(resolvedPath));
     formData.append('return', 'apple_music,spotify,deezer');
 
     const response = await axios.post('https://api.audd.io/', formData, {
@@ -123,4 +142,5 @@ module.exports = {
   detectKey,
   fetchTabsAndChords,
   fetchBackingTrack,
+  sanitizeFilename,
 };
