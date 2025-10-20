@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e
 
 # TabGeni Startup Script
 
@@ -45,8 +46,8 @@ SERVER_PID=$!
 npm run dev &
 FRONTEND_PID=$!
 
-# Trap to kill both processes on exit
-trap "kill $SERVER_PID $FRONTEND_PID 2>/dev/null" EXIT
+# Trap to kill both processes on exit with graceful shutdown
+trap "kill -TERM $SERVER_PID $FRONTEND_PID 2>/dev/null; wait" EXIT
 
 # Wait for processes
 wait
