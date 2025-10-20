@@ -340,14 +340,23 @@ cat fastlane/play-store-credentials.json
 - [Google Play Console](https://play.google.com/console)
 - [Publishing Overview](https://developer.android.com/studio/publish)
 
+## 📚 Additional Documentation
+
+- **[QUICKSTART.md](./QUICKSTART.md)** - Get started in 5 minutes
+- **[DEPLOYMENT.md](./DEPLOYMENT.md)** - Complete deployment guide
+- **[SECRETS_SETUP.md](./SECRETS_SETUP.md)** - Configure GitHub secrets
+- **[CONTRIBUTING.md](./CONTRIBUTING.md)** - Development guidelines
+- **[TROUBLESHOOTING.md](./TROUBLESHOOTING.md)** - Common issues and solutions
+- **[CHANGELOG.md](./CHANGELOG.md)** - Version history
+
 ## 📄 License
 
 MIT License - See root repository LICENSE file
 
 ## 🤝 Contributing
 
-Contributions are welcome! Please see the main repository README for guidelines.
+Contributions are welcome! Please see [CONTRIBUTING.md](./CONTRIBUTING.md) for guidelines.
 
 ---
 
-**Need Help?** Open an issue in the repository or check the troubleshooting section above.
+**Need Help?** Check [TROUBLESHOOTING.md](./TROUBLESHOOTING.md) or open an issue in the repository.
