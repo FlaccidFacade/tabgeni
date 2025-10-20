@@ -33,7 +33,7 @@ export default function Privacy() {
             
             <div className="prose prose-blue max-w-none">
               <p className="text-gray-600 mb-4">
-                <strong>Last Updated:</strong> {new Date().toLocaleDateString()}
+                <strong>Last Updated:</strong> October 20, 2025
               </p>
 
               <section className="mb-8">
