@@ -87,9 +87,24 @@ router.put('/:id', writeLimiter, async (req, res) => {
       return res.status(400).json({ error: 'Invalid song ID format' });
     }
     
+    // Whitelist allowed update fields to prevent injection
+    const allowedFields = [
+      'title', 'artist', 'album', 'bpm', 'key', 'duration',
+      'tabs', 'chords', 'backingTrackUrl', 'youtubeUrl', 'spotifyUrl',
+      'audioUrl', 'thumbnailUrl', 'genre', 'releaseDate', 'userNotes'
+    ];
+    
+    const updateData = {};
+    allowedFields.forEach(field => {
+      if (req.body[field] !== undefined) {
+        updateData[field] = req.body[field];
+      }
+    });
+    updateData.updatedAt = Date.now();
+    
     const song = await Song.findByIdAndUpdate(
       req.params.id,
-      { ...req.body, updatedAt: Date.now() },
+      updateData,
       { new: true, runValidators: true }
     );
     
