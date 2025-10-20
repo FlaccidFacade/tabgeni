@@ -1,0 +1,16 @@
+## This file is used for local Android development.
+## Copy this file to local.properties and fill in your values.
+## DO NOT commit local.properties to version control!
+
+# Location of Android SDK
+# Uncomment and set the path to your Android SDK installation
+# Example (Linux/Mac): /home/username/Android/Sdk
+# Example (Windows): C\:\\Users\\username\\AppData\\Local\\Android\\Sdk
+# sdk.dir=/path/to/android/sdk
+
+# Optional: Signing configuration for local release builds
+# If you want to sign release builds locally, uncomment and configure these:
+# RELEASE_STORE_FILE=/path/to/your/keystore.jks
+# RELEASE_STORE_PASSWORD=your_keystore_password
+# RELEASE_KEY_ALIAS=your_key_alias
+# RELEASE_KEY_PASSWORD=your_key_password

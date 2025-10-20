@@ -181,6 +181,17 @@ npm run build
 npm start
 ```
 
+## 📱 Mobile App
+
+Tabgeni is also available as a native Android app! Check out the [`tabgeni-mobile/`](./tabgeni-mobile) directory for:
+
+- 🤖 **Android WebView app** - Native wrapper for the Tabgeni web app
+- 🚀 **CI/CD workflows** - Automated builds and Play Store deployment
+- 📦 **Build instructions** - How to build and sign the APK/AAB
+- 🔐 **Secrets configuration** - Setup guide for signing and publishing
+
+See [tabgeni-mobile/README.md](./tabgeni-mobile/README.md) for complete documentation on building and publishing the Android app.
+
 ## Contributing
 
 Contributions are welcome! Please feel free to submit a Pull Request.
