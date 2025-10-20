@@ -1,0 +1,42 @@
+default_platform(:android)
+
+platform :android do
+  desc "Deploy a new version to the Google Play Internal Track"
+  lane :deploy_internal do
+    upload_to_play_store(
+      track: 'internal',
+      aab: '../app/build/outputs/bundle/release/app-release.aab',
+      skip_upload_apk: true,
+      skip_upload_metadata: true,
+      skip_upload_images: true,
+      skip_upload_screenshots: true
+    )
+  end
+
+  desc "Deploy a new version to the Google Play Production Track"
+  lane :deploy_production do
+    upload_to_play_store(
+      track: 'production',
+      aab: '../app/build/outputs/bundle/release/app-release.aab',
+      skip_upload_apk: true,
+      skip_upload_metadata: true,
+      skip_upload_images: true,
+      skip_upload_screenshots: true
+    )
+  end
+
+  desc "Build a debug APK"
+  lane :build_debug do
+    gradle(task: "clean assembleDebug")
+  end
+
+  desc "Build a release APK"
+  lane :build_release do
+    gradle(task: "clean assembleRelease")
+  end
+
+  desc "Build a release AAB"
+  lane :build_bundle do
+    gradle(task: "clean bundleRelease")
+  end
+end

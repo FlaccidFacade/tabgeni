@@ -1,0 +1,19 @@
+# Auto detect text files and perform LF normalization
+* text=auto
+
+# Android specific
+*.apk binary
+*.aab binary
+*.dex binary
+*.class binary
+*.jar binary
+*.so binary
+*.jks binary
+*.keystore binary
+
+# Gradle wrapper
+gradlew text eol=lf
+*.bat text eol=crlf
+
+# Scripts
+*.sh text eol=lf

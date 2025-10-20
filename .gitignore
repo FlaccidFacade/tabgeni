@@ -35,3 +35,30 @@ next-env.d.ts
 
 # uploads
 /uploads
+
+# Android
+*.apk
+*.aab
+*.ap_
+*.dex
+.gradle
+/tabgeni-mobile/build/
+/tabgeni-mobile/app/build/
+/tabgeni-mobile/.gradle/
+/tabgeni-mobile/local.properties
+/tabgeni-mobile/captures/
+/tabgeni-mobile/.externalNativeBuild/
+/tabgeni-mobile/.cxx/
+*.jks
+*.keystore
+
+# Fastlane
+/tabgeni-mobile/fastlane/report.xml
+/tabgeni-mobile/fastlane/Preview.html
+/tabgeni-mobile/fastlane/screenshots
+/tabgeni-mobile/fastlane/test_output
+/tabgeni-mobile/fastlane/play-store-credentials.json
+
+# Ruby/Bundler
+/tabgeni-mobile/Gemfile.lock
+/tabgeni-mobile/vendor/
