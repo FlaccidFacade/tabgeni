@@ -102,9 +102,10 @@ router.put('/:id', writeLimiter, async (req, res) => {
     });
     updateData.updatedAt = Date.now();
     
+    // Use $set operator explicitly to prevent injection
     const song = await Song.findByIdAndUpdate(
       req.params.id,
-      updateData,
+      { $set: updateData },
       { new: true, runValidators: true }
     );
     
